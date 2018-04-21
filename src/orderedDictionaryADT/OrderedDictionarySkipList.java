@@ -1,31 +1,32 @@
 package orderedDictionaryADT;
 
-public class OrderedDictionarySkipList<K, V> implements OrderedDictionary<K, V> {
+public class OrderedDictionarySkipList<V> extends SkipList<V> implements OrderedDictionary<V> {
 
 
 
 	@Override
-	public void insertElement(K key, V elem) {
+	public void insertElement(int key, V elem) {
+		
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public V removeElement(K key) {
+	public V removeElement(int key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public V findElement(K key) {
+	public V findElement(int key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public K closestAfter(K key) {
+	public int closestAfter(int key) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 	
 	public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package orderedDictionaryADT;
 
-public class AvlTree {
+public class SkipListTest {
 	public static void main(String[] args) {
 		SkipList skl = new SkipList();
 		skl.skipinsert(1, 1);
@@ -11,6 +11,5 @@ public class AvlTree {
 		skl.skipinsert(3, 1);
 		skl.skipinsert(2, 1);
 		skl.Visualize();
-		
 	}
 }

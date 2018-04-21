@@ -1,12 +1,12 @@
 package orderedDictionaryADT;
 
-public interface OrderedDictionary<K, V> {
+public interface OrderedDictionary<V> {
 	
-	public void insertElement(K key, V elem);
+	public void insertElement(int key, V elem);
 	
-	public V removeElement(K key);
+	public V removeElement(int key);
 	
-	public V findElement(K key);
+	public V findElement(int key);
 	
-	public K closestAfter(K key);
+	public int closestAfter(int key);
 }
