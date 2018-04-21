@@ -1,28 +1,29 @@
 package orderedDictionaryADT;
 
-public class OrderedDictionaryAvlTree<K, V> implements OrderedDictionary<K, V>{
+public class OrderedDictionaryAvlTree<V> implements OrderedDictionary<V> {
 
 	@Override
-	public void insertElement(K key, V elem) {
+	public void insertElement(int key, V elem) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public V removeElement(K key) {
+	public V removeElement(int key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public V findElement(K key) {
+	public V findElement(int key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public K closestAfter(K key) {
+	public int closestAfter(int key) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
+	
 }

@@ -6,7 +6,7 @@ public class SkipList<V> {
 	private SkipListNode<V> posInf; // Level(h) tail, i.e. Upper-right node
 	private int height;
 	private int size;
-	// we might or might not need a variable of int MAX_LEVEL, in here we do not implement MAX_LEVEL constraint. 
+	// we might or might not need a variable of integer MAX_LEVEL, in here we do not implement MAX_LEVEL constraint. 
 	// Experiment: For 200000 trials, only ~ 10 trials have >15 consecutive 'head' (Random.nextInt(2) = 0 OR 1)
 	// Thus, ignoring MAX_LEVEL constraint is not a problem. 
 	
@@ -20,10 +20,7 @@ public class SkipList<V> {
 	}
 	
 	public SkipListNode<V> skipSearch(int k) { // find largest key before k
-		//while(below(k) != null) {
-			
-		//}
-		
+		// while (below(k))
 
 		return null;
 	}
