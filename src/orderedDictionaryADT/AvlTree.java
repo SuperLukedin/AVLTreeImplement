@@ -30,6 +30,15 @@ public class AvlTree {
             return node.height;
         }
     }
+
+    public void show(AVLTreeNode node) {
+        if (node != null)
+        {
+            System.out.print(node.key + " ");
+            show(node.left);
+            show(node.right);
+        }
+    }
      public AVLTreeNode rotateRight (AVLTreeNode targetNode) {
         AVLTreeNode a = targetNode.left;
         targetNode.left = a.right;
@@ -86,5 +95,62 @@ public class AvlTree {
          }
         return targetNode;
         // When the targetNode.key == key, return the targetNode itself.
+     }
+
+     public AVLTreeNode getInorderSuccessor(AVLTreeNode targetNode) {
+        AVLTreeNode curr = targetNode;
+        while (curr.left != null) {
+            curr = curr.left;
+        }
+        return curr;
+     }
+
+     public AVLTreeNode deletion (AVLTreeNode root, int key) {
+        if (root == null) {
+            return root;
+        }
+        if (root.key < key) {
+            root.right = deletion(root.right, key);
+        } else if (root.key > key) {
+            root.left = deletion(root.left, key);
+        } else {
+            if ((root.left != null) && (root.right) != null) {
+                AVLTreeNode newRoot = getInorderSuccessor(root.right);
+                root.key = newRoot.key;
+                root.right = deletion(root.right, newRoot.key);
+            } else {
+                AVLTreeNode newTempNode = null;
+                if (root.left == newTempNode) {
+                    newTempNode = root.right;
+                } else {
+                    newTempNode = root.left;
+                }
+                if (newTempNode == null) {
+                    newTempNode = root;
+                    root = null;
+                } else {
+                    root = newTempNode;
+                }
+            }
+        }
+        if (root == null) {
+            return root;
+        }
+        root.height = 1 + Math.max(height(root.left), height(root.right));
+         if (getBalanceFactor(root) > 1 && getBalanceFactor(root.left) >= 0)
+             return rotateRight(root);
+         if (getBalanceFactor(root) < -1 && getBalanceFactor(root.right) <= 0)
+             return rotateLeft(root);
+         if (getBalanceFactor(root) > 1 && getBalanceFactor(root.left) < 0)
+         {
+             root.left = rotateLeft(root.left);
+             return rotateRight(root);
+         }
+         if (getBalanceFactor(root) < -1 && getBalanceFactor(root.right) > 0)
+         {
+             root.right = rotateRight(root.right);
+             return rotateLeft(root);
+         }
+         return root;
      }
 }
