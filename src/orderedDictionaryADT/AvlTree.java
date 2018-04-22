@@ -105,19 +105,19 @@ public class AvlTree {
         return curr;
      }
 
-     public AVLTreeNode deletion (AVLTreeNode root, int key) {
+     public AVLTreeNode remove(AVLTreeNode root, int key) {
         if (root == null) {
             return root;
         }
         if (root.key < key) {
-            root.right = deletion(root.right, key);
+            root.right = remove(root.right, key);
         } else if (root.key > key) {
-            root.left = deletion(root.left, key);
+            root.left = remove(root.left, key);
         } else {
             if ((root.left != null) && (root.right) != null) {
                 AVLTreeNode newRoot = getInorderSuccessor(root.right);
                 root.key = newRoot.key;
-                root.right = deletion(root.right, newRoot.key);
+                root.right = remove(root.right, newRoot.key);
             } else {
                 AVLTreeNode newTempNode = null;
                 if (root.left == newTempNode) {
@@ -152,5 +152,13 @@ public class AvlTree {
              return rotateLeft(root);
          }
          return root;
+     }
+     public int closestKeyAfter (int key) {
+        int goal;
+        int min = Integer.MAX_VALUE;
+        if (root == null) {
+            return  -1;
+        }
+
      }
 }

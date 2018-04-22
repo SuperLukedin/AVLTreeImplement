@@ -24,7 +24,7 @@ public class SkipListNode<V> {
 	public SkipListNode(int k, V v){
 		this.key = k;
 		this.val = v;
-		this.level = 1;
+		this.level = 0;
 		
 		this.setUp(null);
 		this.setDown(null);
