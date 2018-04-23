@@ -12,15 +12,14 @@ public class OrderedDictionarySkipList<V> extends SkipList<V> implements Ordered
 	}
 
 	@Override
-	public V removeElement(int key) {
+	public void removeElement(int key) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
-	public V findElement(int key) {
+	public int findElement(int key) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override

@@ -1,25 +1,32 @@
 package orderedDictionaryADT;
 
-public class AvlTree {
-    private AVLTreeNode root;
+public class AvlTree<V> {
+    public AVLTreeNode<V> root;
 
     public AvlTree(AVLTreeNode root) {    //Constructor
-        this.root = null;
+        this.root = root;
     }
 
     public AVLTreeNode getRoot() {
         return root;
     }
 
-    public AVLTreeNode find (int key, AVLTreeNode Node) {
-        if (Node == null) {
+    public AVLTreeNode find (AVLTreeNode node, int key) {
+        if (node == null) {
             return null;
-        } else if (Node.key == key){
-            return Node;
-        } else if (Node.key < key) {
-            return find(key, Node.right);
+        } else if (node.key == key){
+            return node;
+        } else if (node.key < key) {
+            return find(node.right, key);
         } else {
-            return find(key, Node.left);
+            return find(node.left, key);
+        }
+    }
+    public boolean isFound (AVLTreeNode node, int key) {
+        if (find(node, key) != null) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -31,11 +38,16 @@ public class AvlTree {
         }
     }
 
+    public void InOrderShow (AVLTreeNode node) {
+        System.out.println("Inorder traversal of the tree:");
+        show(node);
+        System.out.printf("\n");
+    }
     public void show(AVLTreeNode node) {
         if (node != null)
         {
-            System.out.print(node.key + " ");
             show(node.left);
+            System.out.print(node.key + " ");
             show(node.right);
         }
     }
@@ -66,16 +78,16 @@ public class AvlTree {
         return height(targetNode.left) - height(targetNode.right);
      }
 
-     public AVLTreeNode insertion (AVLTreeNode targetNode, int key) {
+     public AVLTreeNode insertion (AVLTreeNode targetNode, int key, V elem) {
         if (targetNode == null) {
-            return new AVLTreeNode(key);
+            return new AVLTreeNode(key, elem);
         }
         if (targetNode.key > key) {
-            targetNode.left = insertion(targetNode.left, key);
+            targetNode.left = insertion(targetNode.left, key, elem);
         } else if (targetNode.key < key) {
-            targetNode.right = insertion(targetNode.right, key);
+            targetNode.right = insertion(targetNode.right, key, elem);
         } else {
-            System.out.println("This is a duplicate key.");
+            System.out.println("Duplicated key " + "'"+ key + "' cannot be inserted.\n");
         }
         targetNode.height = Math.max(height(targetNode.left), height(targetNode.right)) + 1;
 
@@ -152,13 +164,5 @@ public class AvlTree {
              return rotateLeft(root);
          }
          return root;
-     }
-     public int closestKeyAfter (int key) {
-        int goal;
-        int min = Integer.MAX_VALUE;
-        if (root == null) {
-            return  -1;
-        }
-
      }
 }
