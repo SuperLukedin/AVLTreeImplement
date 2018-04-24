@@ -1,9 +1,12 @@
 package orderedDictionaryADT;
 
+import java.util.ArrayList;
+
 public class AvlTreeTest {
     public static void main(String[] args) {
         AVLTreeNode root = new AVLTreeNode(12, 55);
-        AvlTree tree = new AvlTree(root);
+        ArrayList<Integer> anotherList = new ArrayList<Integer>();
+        AvlTree tree = new AvlTree(root, anotherList);
         tree.root = tree.insertion(tree.root, 30, 22);
         tree.root = tree.insertion(tree.root, 40,88);
         tree.root = tree.insertion(tree.root, 20, 90);

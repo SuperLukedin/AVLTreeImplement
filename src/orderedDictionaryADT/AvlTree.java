@@ -1,10 +1,14 @@
 package orderedDictionaryADT;
 
+import java.util.ArrayList;
+
 public class AvlTree<V> {
     public AVLTreeNode<V> root;
+    public ArrayList<Integer> visitedList;
 
-    public AvlTree(AVLTreeNode root) {    //Constructor
+    public AvlTree(AVLTreeNode root, ArrayList<Integer> theList) {    //Constructor
         this.root = root;
+        this.visitedList = theList;
     }
 
     public AVLTreeNode getRoot() {
@@ -22,6 +26,24 @@ public class AvlTree<V> {
             return find(node.left, key);
         }
     }
+    public AVLTreeNode findAndVisitedArray (AVLTreeNode node, int key) {
+        if (node == null) {
+            return null;
+        } else if (node.key == key){
+            System.out.println("Nodes had visted: " + visitedList);
+            return node;
+        } else if (node.key < key) {
+            visitedList.add(node.key);
+            return findAndVisitedArray(node.right, key);
+        } else {
+            visitedList.add(node.key);
+            return findAndVisitedArray(node.left, key);
+        }
+    }
+    public void showList (ArrayList visitedList) {
+        System.out.println(visitedList);
+    }
+
     public boolean isFound (AVLTreeNode node, int key) {
         if (find(node, key) != null) {
             return true;
@@ -43,6 +65,7 @@ public class AvlTree<V> {
         show(node);
         System.out.printf("\n");
     }
+
     public void show(AVLTreeNode node) {
         if (node != null)
         {
@@ -51,24 +74,35 @@ public class AvlTree<V> {
             show(node.right);
         }
     }
+
      public AVLTreeNode rotateRight (AVLTreeNode targetNode) {
-        AVLTreeNode a = targetNode.left;
-        targetNode.left = a.right;
-        a.right = targetNode;
+        //AVLTreeNode a = targetNode.left;
+//        targetNode.left = a.right;
+//        a.right = targetNode;
+         AVLTreeNode tempNode1 = targetNode.left;
+         AVLTreeNode tempNode2 = tempNode1.right;
+         tempNode1.right = targetNode;
+         targetNode.left = tempNode2;
+
          //Update height for targetNode and a with the highest child node(either left or right) + 1;
         targetNode.height = Math.max(height(targetNode.left), height(targetNode.right)) + 1;
-        a.height = Math.max(height(a.left), height(a.right)) + 1;
-        return a;    // position of targetNode was replaced by a.
+        tempNode1.height = Math.max(height(tempNode1.left), height(tempNode1.right)) + 1;
+        return tempNode1;    // position of targetNode was replaced by tempNode1.
      }
 
      public AVLTreeNode rotateLeft (AVLTreeNode targetNode) {
-        AVLTreeNode a = targetNode.right;
-        targetNode.right = a.left;
-        a.left = targetNode;
+//        AVLTreeNode a = targetNode.right;
+//        targetNode.right = a.left;
+//        a.left = targetNode;
+         AVLTreeNode tempNode3 = targetNode.right;
+         AVLTreeNode tempNode4 = tempNode3.left;
+         tempNode3.left = targetNode;
+         targetNode.right = tempNode4;
+
         //Update height for targetNode and a with the highest child node(either left or right) + 1;
         targetNode.height = Math.max(height(targetNode.left), height(targetNode.right)) + 1;
-        a.height = Math.max(height(a.left), height(a.right)) + 1;
-        return a;
+        tempNode3.height = Math.max(height(tempNode3.left), height(tempNode3.right)) + 1;
+        return tempNode3;
      }
 
      public int getBalanceFactor (AVLTreeNode targetNode) {

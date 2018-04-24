@@ -8,5 +8,5 @@ public interface OrderedDictionary<V> {
 	
 	public int findElement(int key);
 	
-	public int closestAfter(int key);
+	public int closestKeyAfter(int key);
 }

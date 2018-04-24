@@ -23,7 +23,7 @@ public class OrderedDictionarySkipList<V> extends SkipList<V> implements Ordered
 	}
 
 	@Override
-	public int closestAfter(int key) {
+	public int closestKeyAfter(int key) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
