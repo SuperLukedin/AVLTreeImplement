@@ -1,6 +1,7 @@
 package orderedDictionaryADT;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AvlTree<V> {
     public AVLTreeNode<V> root;
@@ -30,7 +31,7 @@ public class AvlTree<V> {
         if (node == null) {
             return null;
         } else if (node.key == key){
-            System.out.println("Nodes had visted: " + visitedList);
+            //System.out.println("Nodes had visted: " + visitedList);
             return node;
         } else if (node.key < key) {
             visitedList.add(node.key);
@@ -199,4 +200,35 @@ public class AvlTree<V> {
          }
          return root;
      }
+
+    public int closestAfter(int key) {
+        if (isFound(this.root, key)) {
+            AVLTreeNode theNode = find(this.root, key);
+            if (theNode.right != null) {
+                int ans = getInorderSuccessor(theNode.right).key;
+//                System.out.println("The closest key after '" + key + "' "
+//                        + " is " + " '" + ans + "'.\n");
+                return ans;
+            } else if (theNode.right == null){
+                findAndVisitedArray(this.root, key);
+                if ((int) Collections.max(visitedList) < key){
+//                    System.out.println("No key is greater than '" + key + "'.\n");
+                    return -1;
+                } else {
+                    for (int i = visitedList.size() - 1; i >= 0; i--) {
+                        if ((int) visitedList.get(i) > key) {
+                            int ans = (int) visitedList.get(i);
+                            //System.out.println("The closest key after '" + key + "' is '" + ans + "'\n");
+                            return ans;
+                        }
+                    }
+                }
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
+        return -1;
+    }
 }

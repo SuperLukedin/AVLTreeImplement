@@ -33,19 +33,19 @@ public class SkipList<V> {
 		return p;
 	}
 	
-	public void skipinsert(int k, V v) {
+	public void skipInsert(int k, V v) {
 		if (skipSearch(k).getKey() == k) {
-			System.out.print("key already existed.");
+			// System.out.print("key already existed.");
 			return;
 		} 
 		
-		System.out.print("---\n");
+		// System.out.print("---\n");
 		SkipListNode<V> ins = new SkipListNode<V>(k, v);
 		// search closest node before k
 		SkipListNode<V> prevNode = skipSearch(k);
 		// setup double link       prevNode === ins === after(prevNode) 
-		System.out.printf("Inserting: elem. [%d] between [%d] & [%d]\n", 
-				ins.getKey(), prevNode.getKey(), after(prevNode).getKey());
+		// System.out.printf("Inserting: elem. [%d] between [%d] & [%d]\n",
+		// 		ins.getKey(), prevNode.getKey(), after(prevNode).getKey());
 		if (prevNode.equals(this.negInf) && after(prevNode).equals(this.posInf)) {
 			SkipListNode<V> newNeg = new SkipListNode<V>(Integer.MIN_VALUE, null, this.height+1);
 			SkipListNode<V> newPos = new SkipListNode<V>(Integer.MAX_VALUE, null, this.height+1);
@@ -62,7 +62,7 @@ public class SkipList<V> {
 			this.posInf = newPos;
 			
 			this.height++;
-			System.out.print("Adding first element into SkipList (height++). \n");
+			// System.out.print("Adding first element into SkipList (height++). \n");
 		}
 		
 		ins.setNext(after(prevNode));
@@ -100,11 +100,11 @@ public class SkipList<V> {
 				this.posInf = newPosInf;
 				
 				this.height++;
-				System.out.print("Created new top level (height++). \n");
+				// System.out.print("Created new top level (height++). \n");
 			}
 			prevNode = above(prevNode);
-			System.out.printf("Inserting: elem. [%d] between [%d] & [%d]\n", 
-					curr.getKey(), prevNode.getKey(), after(prevNode).getKey());
+			// System.out.printf("Inserting: elem. [%d] between [%d] & [%d]\n",
+			//		curr.getKey(), prevNode.getKey(), after(prevNode).getKey());
 			// add curr Node into upper layer	(horizontal links)
 			curr.setNext(after(prevNode));
 			curr.setPrev(prevNode);
@@ -165,8 +165,8 @@ public class SkipList<V> {
 		del.setNext(null);
 		
 		size--;
-		System.out.printf("Deleted elem. [%d] with %d levels\n", 
-				k, levelCount);
+		// System.out.printf("Deleted elem. [%d] with %d levels\n",
+		//		k, levelCount);
 	}
 	
 	public void Visualize() {
@@ -232,6 +232,15 @@ public class SkipList<V> {
 	}
 	
 	public boolean isEmpty() {return (this.height == 0);}
+	public SkipListNode<V> getElementByKey(int k){
+		SkipListNode<V> e = skipSearch(k);
+		if (e.getKey() == k) {
+			return(e);
+		} else {
+			return(null);
+		}
+		
+	}
 	
 	public SkipListNode<V> before(SkipListNode<V> n) {return n.getPrev();}
 	public SkipListNode<V> after(SkipListNode<V> n) {return n.getNext();}
@@ -252,19 +261,19 @@ public class SkipList<V> {
 		// System.out.print(skl.skipSearch(1) + "\n"); // should print pointer to negInf
 		
 		skl.setSeed(631);
-		skl.skipinsert(1, 1); // 1st elem
+		skl.skipInsert(1, 1); // 1st elem
 		skl.Visualize();
 		//System.out.print(skl.skipSearch(1) + "\n"); // should print a pointer to new node
-		skl.skipinsert(12, 1);
-		skl.skipinsert(10, 1);
-		skl.skipinsert(7, 1);
-		skl.skipinsert(9, 1); // 5th elem
+		skl.skipInsert(12, 1);
+		skl.skipInsert(10, 1);
+		skl.skipInsert(7, 1);
+		skl.skipInsert(9, 1); // 5th elem
 		skl.Visualize();
-		skl.skipinsert(3, 1);
-		skl.skipinsert(2, 1);
-		skl.skipinsert(217, 1);
-		skl.skipinsert(219, 1);
-		skl.skipinsert(213, 1); // 10th elem
+		skl.skipInsert(3, 1);
+		skl.skipInsert(2, 1);
+		skl.skipInsert(217, 1);
+		skl.skipInsert(219, 1);
+		skl.skipInsert(213, 1); // 10th elem
 		skl.Visualize();
 		
 		skl.skipRemove(7);
